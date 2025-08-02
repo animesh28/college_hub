@@ -32,6 +32,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { log } from "console";
 
 // Animation variants
 const containerVariants = {
@@ -65,7 +66,7 @@ const clubs = [
     category: "Technology",
     description: "Join fellow coders to build projects, participate in hackathons, and learn new technologies.",
     memberCount: 87,
-    logo: "/assets/clubs/coding-club.jpg",
+    logo: "/images/Coding.jpg",
     events: 3,
     nextEvent: "2025-08-05T18:00:00",
     nextEventName: "Algorithm Design Workshop",
@@ -81,7 +82,7 @@ const clubs = [
     category: "Technology",
     description: "Design, build, and program robots for competitions and exhibitions.",
     memberCount: 45,
-    logo: "/assets/clubs/robotics-society.jpg",
+    logo: "/images/Robotics.jpg",
     events: 2,
     nextEvent: "2025-08-10T15:00:00",
     nextEventName: "Bot Battle Competition",
@@ -97,7 +98,7 @@ const clubs = [
     category: "Recreation",
     description: "Weekly meetings for chess enthusiasts of all skill levels.",
     memberCount: 32,
-    logo: "/assets/clubs/chess-club.jpg",
+    logo: "/images/Chess.jpg",
     events: 1,
     nextEvent: "2025-08-03T16:00:00",
     nextEventName: "Open Tournament",
@@ -125,7 +126,7 @@ const clubs = [
     category: "Business",
     description: "Connect with fellow entrepreneurs, develop business plans, and pitch to potential investors.",
     memberCount: 53,
-    logo: "/assets/clubs/entrepreneurship-club.jpg",
+    logo: "/images/Entrepreneur.jpg",
     events: 4,
     nextEvent: "2025-08-04T17:30:00",
     nextEventName: "Startup Pitch Night",
@@ -155,7 +156,7 @@ const clubs = [
     category: "Arts",
     description: "Watch and discuss classic and contemporary films, and create short films.",
     memberCount: 38,
-    logo: "/assets/clubs/film-club.jpg",
+    logo: "/images/Film.jpg",
     events: 2,
     nextEvent: "2025-08-07T19:00:00",
     nextEventName: "Documentary Night",
@@ -171,7 +172,7 @@ const clubs = [
     category: "Service",
     description: "Work on sustainability initiatives and environmental awareness campaigns.",
     memberCount: 42,
-    logo: "/assets/clubs/environmental-club.jpg",
+    logo: "/images/Environment.jpg",
     events: 3,
     nextEvent: "2025-08-06T09:00:00",
     nextEventName: "Campus Cleanup Drive",
@@ -340,7 +341,7 @@ export default function ClubsPage() {
                 transition={{ duration: 0.2 }}
               >
                 <Card className="h-full overflow-hidden hover:shadow-md transition-shadow">
-                  <div className="relative h-32 bg-slate-100 dark:bg-slate-800">
+                  <div style={{height: '16rem'}} className="relative bg-slate-100 dark:bg-slate-800">
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-3 left-3 right-3 flex justify-between items-end">
                       <h3 className="font-semibold text-white text-lg">{club.name}</h3>

@@ -15,7 +15,11 @@ import {
   Menu,
   X,
   User,
-  NotebookPen  
+  NotebookPen,
+  CreditCard,
+  MapPin,
+  QrCode,
+  Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -27,62 +31,121 @@ export function MainLayout() {
   const location = useLocation();
   
   const navItems = [
+    // Dashboard
     {
       name: "Dashboard",
       href: "/",
       icon: <Laptop className="h-5 w-5" />,
+      category: "main"
     },
+    
+    // Communication
     {
       name: "Emails",
       href: "/emails",
       icon: <Mail className="h-5 w-5" />,
+      category: "communication"
     },
     {
       name: "Meetings",
       href: "/meetings",
       icon: <Calendar className="h-5 w-5" />,
-    },
-    {
-      name: "Notes",
-      href: "/notes",
-      icon: <BookText className="h-5 w-5" />,
-    },
-    {
-      name: "Assignments",
-      href: "/assignments",
-      icon: <NotebookPen className="h-5 w-5" />,
+      category: "communication"
     },
     {
       name: "Study Partners",
       href: "/partners",
       icon: <Users className="h-5 w-5" />,
+      category: "communication"
+    },
+    
+    // Academic
+    {
+      name: "Class Schedule",
+      href: "/schedule",
+      icon: <Clock className="h-5 w-5" />,
+      category: "academic"
     },
     {
-      name: "Chat",
-      href: "/chat",
-      icon: <MessageSquare className="h-5 w-5" />,
+      name: "Notes",
+      href: "/notes",
+      icon: <BookText className="h-5 w-5" />,
+      category: "academic"
     },
     {
-      name: "Clubs",
-      href: "/clubs",
-      icon: <Award className="h-5 w-5" />,
-    },
-    {
-      name: "Placements",
-      href: "/placements",
-      icon: <Briefcase className="h-5 w-5" />,
-    },
-    {
-      name: "Updates",
-      href: "/updates",
-      icon: <BellRing className="h-5 w-5" />,
+      name: "Assignments",
+      href: "/assignments",
+      icon: <NotebookPen className="h-5 w-5" />,
+      category: "academic"
     },
     {
       name: "Attendance",
       href: "/attendance",
       icon: <LineChart className="h-5 w-5" />,
+      category: "academic"
+    },
+    
+    // Campus Services
+    {
+      name: "Fee Management",
+      href: "/fee",
+      icon: <CreditCard className="h-5 w-5" />,
+      category: "services"
+    },
+    {
+      name: "Student ID & Wallet",
+      href: "/id",
+      icon: <QrCode className="h-5 w-5" />,
+      category: "services"
+    },
+    {
+      name: "Campus Navigator",
+      href: "/campus",
+      icon: <MapPin className="h-5 w-5" />,
+      category: "services"
+    },
+    
+    // Activities
+    {
+      name: "Clubs",
+      href: "/clubs",
+      icon: <Award className="h-5 w-5" />,
+      category: "activities"
+    },
+    {
+      name: "Placements",
+      href: "/placements",
+      icon: <Briefcase className="h-5 w-5" />,
+      category: "activities"
+    },
+    
+    // Updates
+    {
+      name: "Updates",
+      href: "/updates",
+      icon: <BellRing className="h-5 w-5" />,
+      category: "updates"
     },
   ];
+
+  // Group navigation items by category
+  const groupedNavItems = {
+    main: navItems.filter(item => item.category === "main"),
+    communication: navItems.filter(item => item.category === "communication"),
+    academic: navItems.filter(item => item.category === "academic"),
+    services: navItems.filter(item => item.category === "services"),
+    activities: navItems.filter(item => item.category === "activities"),
+    updates: navItems.filter(item => item.category === "updates")
+  };
+
+  const categoryLabels = {
+    main: "Dashboard",
+    communication: "Communication",
+    academic: "Academic",
+    services: "Campus Services",
+    activities: "Activities",
+    updates: "Updates"
+  };
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -106,13 +169,13 @@ export function MainLayout() {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className={cn(
               "fixed inset-y-0 left-0 z-40 w-72 bg-background/80 backdrop-blur-md border-r",
-              "flex flex-col p-6",
+              "flex flex-col p-6 overflow-y-auto",
               "lg:relative lg:block",
               sidebarOpen ? "block" : "hidden lg:block"
             )}
           >
             {/* Logo */}
-            <div className="flex items-center justify-start mb-10">
+            <div className="flex items-center justify-start mb-8 sticky top-0 bg-background/80 backdrop-blur-md py-2">
               <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl">
                 CH
               </div>
@@ -120,34 +183,43 @@ export function MainLayout() {
             </div>
             
             {/* Navigation */}
-            <nav className="space-y-2 flex-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  onClick={() => setSidebarOpen(false)}
-                  className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all",
-                    "hover:bg-accent/50 hover:text-accent-foreground",
-                    location.pathname === item.href
-                      ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground"
-                  )}
-                >
-                  {item.icon}
-                  {item.name}
-                </Link>
+            <nav className="space-y-6 flex-1 pb-6">
+              {Object.entries(groupedNavItems).map(([category, items]) => (
+                <div key={category}>
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-3">
+                    {categoryLabels[category as keyof typeof categoryLabels]}
+                  </h3>
+                  <div className="space-y-1">
+                    {items.map((item) => (
+                      <Link
+                        key={item.href}
+                        to={item.href}
+                        onClick={() => setSidebarOpen(false)}
+                        className={cn(
+                          "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all",
+                          "hover:bg-accent/50 hover:text-accent-foreground",
+                          location.pathname === item.href
+                            ? "bg-accent text-accent-foreground"
+                            : "text-muted-foreground"
+                        )}
+                      >
+                        {item.icon}
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               ))}
             </nav>
 
             {/* User Profile */}
-            <div className="mt-auto pt-4 border-t">
+            <div className="mt-auto pt-6 border-t sticky bottom-0 bg-background/80 backdrop-blur-md">
               <div className="flex items-center gap-3 py-3">
                 <Avatar>
                   <AvatarImage src="/images/ProfilePicture.jpg" />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
-                <div>
+                <div className="flex-1">
                   <p className="text-sm font-medium">Jane Doe</p>
                   <p className="text-xs text-muted-foreground">Computer Science</p>
                 </div>

@@ -109,7 +109,7 @@ const placements = [
     totalStages: 4,
     requirements: ["Bachelor's in Computer Science", "2+ years experience", "React & Node.js"],
     applicationProgress: 50,
-    logo: "/assets/companies/technova.png",
+    logo: "/images/Job.jpg",
     starred: true,
   },
   {
@@ -127,7 +127,7 @@ const placements = [
     totalStages: 4,
     requirements: ["Master's in Data Science", "Python", "Machine Learning"],
     applicationProgress: 25,
-    logo: "/assets/companies/dataviz.png",
+    logo: "/images/Job.jpg",
     starred: false,
   },
   {
@@ -145,7 +145,7 @@ const placements = [
     totalStages: 3,
     requirements: ["JavaScript", "React", "UI/UX knowledge"],
     applicationProgress: 33,
-    logo: "/assets/companies/fintech.png",
+    logo: "/images/Job.jpg",
     starred: true,
   },
   {
@@ -163,7 +163,7 @@ const placements = [
     totalStages: 4,
     requirements: ["AWS", "Docker", "Kubernetes", "CI/CD"],
     applicationProgress: 75,
-    logo: "/assets/companies/cloudsphere.png",
+    logo: "/images/Job.jpg",
     starred: false,
   },
   {
@@ -181,7 +181,7 @@ const placements = [
     totalStages: 4,
     requirements: ["iOS", "Android", "Flutter"],
     applicationProgress: 100,
-    logo: "/assets/companies/healthtech.png",
+    logo: "/images/Job.jpg",
     starred: true,
   },
   {
@@ -199,7 +199,7 @@ const placements = [
     totalStages: 4,
     requirements: ["Bachelor's in Engineering", "Systems design", "MATLAB"],
     applicationProgress: 25,
-    logo: "/assets/companies/aerotech.png",
+    logo: "/images/Job.jpg",
     starred: false,
   },
   {
@@ -217,7 +217,7 @@ const placements = [
     totalStages: 4,
     requirements: ["3+ years experience", "Agile methodologies", "EdTech background"],
     applicationProgress: 50,
-    logo: "/assets/companies/edulearn.png",
+    logo: "/images/Job.jpg",
     starred: false,
   },
   {
@@ -235,7 +235,7 @@ const placements = [
     totalStages: 3,
     requirements: ["Environmental Science degree", "Data analysis", "Sustainability reporting"],
     applicationProgress: 33,
-    logo: "/assets/companies/greenenergy.png",
+    logo: "/images/Job.jpg",
     starred: false,
   },
 ];
