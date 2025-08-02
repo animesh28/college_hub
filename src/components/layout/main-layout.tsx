@@ -7,14 +7,13 @@ import {
   Calendar,
   BookText,
   Users,
-  MessageSquare,
+  BarChart2,
   Award,
   Briefcase,
   BellRing,
   LineChart,
   Menu,
   X,
-  User,
   NotebookPen,
   CreditCard,
   MapPin,
@@ -87,7 +86,12 @@ export function MainLayout() {
       icon: <LineChart className="h-5 w-5" />,
       category: "academic"
     },
-    
+    {
+      name: "Results",
+      href: "/results",
+      icon: <BarChart2 className="h-5 w-5" />,
+      category: "academic"
+    },
     // Campus Services
     {
       name: "Fee Management",

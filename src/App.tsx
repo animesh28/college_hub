@@ -19,6 +19,7 @@ import ClassSchedulePage from './pages/Schedule';
 import FeeManagementPage from './pages/FeeManagement';
 import CampusNavigatorPage from './pages/CampusNavigator';
 import StudentIDWalletPage from './pages/StudentID';
+import ResultsPage from './pages/ResultsPage';
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
               <Route path="meetings" element={<MeetingsPage />} />
               <Route path="notes" element={<NotesPage />} />
               <Route path="assignments" element={<AssignmentsPage />} />
+              <Route path="results" element={<ResultsPage />} />
               <Route path="partners" element={<PartnersPage />} />
               <Route path="schedule" element={<ClassSchedulePage />} />
               <Route path="fee" element={<FeeManagementPage />} />
