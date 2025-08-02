@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import {
@@ -154,6 +154,8 @@ export function MainLayout() {
     updates: "Updates"
   };
 
+  const mainContentRef = useRef<HTMLDivElement | null>(null);
+
   return (
     <div className="min-h-screen bg-background flex">
       {/* Theme Toggle - Fixed Top Right */}
@@ -226,7 +228,16 @@ export function MainLayout() {
                       <Link
                         key={item.href}
                         to={item.href}
-                        onClick={() => setSidebarOpen(false)}
+                        onClick={() => {
+    setSidebarOpen(false);
+    // Scroll the main content area to top
+    // If you want viewport scroll: window.scrollTo(0, 0);
+    if (mainContentRef.current) {
+      mainContentRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }}
                         className={cn(
                           "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all",
                           "hover:bg-accent/50 hover:text-accent-foreground",
