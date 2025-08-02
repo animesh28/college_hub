@@ -1,0 +1,167 @@
+import React, { useState } from "react";
+import { cn } from "@/lib/utils";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import {
+  Laptop,
+  Mail,
+  Calendar,
+  BookText,
+  Users,
+  MessageSquare,
+  Award,
+  Briefcase,
+  BellRing,
+  LineChart,
+  Menu,
+  X,
+  User,
+  NotebookPen  
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ModeToggle } from "@/components/theme-toggle";
+import { motion, AnimatePresence } from "framer-motion";
+
+export function MainLayout() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
+  
+  const navItems = [
+    {
+      name: "Dashboard",
+      href: "/",
+      icon: <Laptop className="h-5 w-5" />,
+    },
+    {
+      name: "Emails",
+      href: "/emails",
+      icon: <Mail className="h-5 w-5" />,
+    },
+    {
+      name: "Meetings",
+      href: "/meetings",
+      icon: <Calendar className="h-5 w-5" />,
+    },
+    {
+      name: "Notes",
+      href: "/notes",
+      icon: <BookText className="h-5 w-5" />,
+    },
+    {
+      name: "Assignments",
+      href: "/assignments",
+      icon: <NotebookPen className="h-5 w-5" />,
+    },
+    {
+      name: "Study Partners",
+      href: "/partners",
+      icon: <Users className="h-5 w-5" />,
+    },
+    {
+      name: "Chat",
+      href: "/chat",
+      icon: <MessageSquare className="h-5 w-5" />,
+    },
+    {
+      name: "Clubs",
+      href: "/clubs",
+      icon: <Award className="h-5 w-5" />,
+    },
+    {
+      name: "Placements",
+      href: "/placements",
+      icon: <Briefcase className="h-5 w-5" />,
+    },
+    {
+      name: "Updates",
+      href: "/updates",
+      icon: <BellRing className="h-5 w-5" />,
+    },
+    {
+      name: "Attendance",
+      href: "/attendance",
+      icon: <LineChart className="h-5 w-5" />,
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background flex">
+      {/* Mobile Sidebar Toggle */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="fixed top-4 left-4 z-50 lg:hidden"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </Button>
+
+      {/* Sidebar */}
+      <AnimatePresence>
+        {(sidebarOpen || typeof window !== "undefined" && window.innerWidth >= 1024) && (
+          <motion.div
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className={cn(
+              "fixed inset-y-0 left-0 z-40 w-72 bg-background/80 backdrop-blur-md border-r",
+              "flex flex-col p-6",
+              "lg:relative lg:block",
+              sidebarOpen ? "block" : "hidden lg:block"
+            )}
+          >
+            {/* Logo */}
+            <div className="flex items-center justify-start mb-10">
+              <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl">
+                CH
+              </div>
+              <span className="ml-3 text-xl font-bold">CollegeHub</span>
+            </div>
+            
+            {/* Navigation */}
+            <nav className="space-y-2 flex-1">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  onClick={() => setSidebarOpen(false)}
+                  className={cn(
+                    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all",
+                    "hover:bg-accent/50 hover:text-accent-foreground",
+                    location.pathname === item.href
+                      ? "bg-accent text-accent-foreground"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {item.icon}
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+
+            {/* User Profile */}
+            <div className="mt-auto pt-4 border-t">
+              <div className="flex items-center gap-3 py-3">
+                <Avatar>
+                  <AvatarImage src="/images/ProfilePicture.jpg" />
+                  <AvatarFallback>JD</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-medium">Jane Doe</p>
+                  <p className="text-xs text-muted-foreground">Computer Science</p>
+                </div>
+                <ModeToggle />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main Content */}
+      <div className="flex-1 relative overflow-auto p-4 lg:p-6">
+        <Outlet />
+      </div>
+    </div>
+  );
+}
