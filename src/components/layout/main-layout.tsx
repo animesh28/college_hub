@@ -25,10 +25,13 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ModeToggle } from "@/components/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "../theme-provider";
 
 export function MainLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const { theme } = useTheme();
+  const currentTheme = theme;
   
   const navItems = [
     // Dashboard
@@ -149,6 +152,11 @@ export function MainLayout() {
 
   return (
     <div className="min-h-screen bg-background flex">
+      {/* Theme Toggle - Fixed Top Right */}
+      <div className="fixed top-4 right-4 z-50">
+        <ModeToggle />
+      </div>
+
       {/* Mobile Sidebar Toggle */}
       <Button
         variant="ghost"
@@ -175,12 +183,32 @@ export function MainLayout() {
             )}
           >
             {/* Logo */}
-            <div className="flex items-center justify-start mb-8 sticky top-0 bg-background/80 backdrop-blur-md py-2">
-              <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl">
-                CH
-              </div>
-              <span className="ml-3 text-xl font-bold">CollegeHub</span>
+            {/* Logo - PRESERVING EXACT ORIGINAL STYLING */}
+            <div className="flex items-center justify-center mb-8 sticky top-0 bg-background/80 backdrop-blur-md py-2">
+                <div className="w-full p-3 rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-sm border border-white/20 dark:border-white/10 shadow-lg">
+                    <div className="relative">
+                        {/* Light mode logo */}
+                        <img 
+                            src="/images/Logo_Light.png" 
+                            alt="CollegeHub Logo" 
+                            className={`w-full h-16 rounded-xl object-cover transition-opacity duration-300 ${
+                                currentTheme === "dark" ? "opacity-0 absolute inset-0" : "opacity-100"
+                            }`}
+                        />
+                        
+                        {/* Dark mode logo */}
+                        <img 
+                            src="/images/Logo_Dark.png" 
+                            alt="CollegeHub Logo" 
+                            className={`w-full h-16 rounded-xl object-cover transition-opacity duration-300 ${
+                                currentTheme === "dark" ? "opacity-100" : "opacity-0 absolute inset-0"
+                            }`}
+                        />
+                    </div>
+                </div>
             </div>
+
+
             
             {/* Navigation */}
             <nav className="space-y-6 flex-1 pb-6">
@@ -223,7 +251,6 @@ export function MainLayout() {
                   <p className="text-sm font-medium">Jane Doe</p>
                   <p className="text-xs text-muted-foreground">Computer Science</p>
                 </div>
-                <ModeToggle />
               </div>
             </div>
           </motion.div>
