@@ -18,7 +18,8 @@ import {
   CreditCard,
   MapPin,
   QrCode,
-  Clock
+  Clock,
+  Aperture
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -125,6 +126,12 @@ export function MainLayout() {
       icon: <Briefcase className="h-5 w-5" />,
       category: "activities"
     },
+    {
+      name: "Miscellaneous",
+      href: "/misc",
+      icon: <Aperture className="h-5 w-5" />,
+      category: "updates"
+    },
     
     // Updates
     {
@@ -132,7 +139,7 @@ export function MainLayout() {
       href: "/updates",
       icon: <BellRing className="h-5 w-5" />,
       category: "updates"
-    },
+    }
   ];
 
   // Group navigation items by category

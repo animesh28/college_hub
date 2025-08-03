@@ -1,10 +1,9 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CalendarDays, ArrowRight, CheckCircle2, Clock, BookOpen, AlertTriangle } from "lucide-react";
+import {  ArrowRight, CheckCircle2, Clock, BookOpen, AlertTriangle } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -406,56 +405,6 @@ export default function Dashboard() {
           </Card>
         </motion.div>
       </div>
-
-      {/* Calendar */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.5 }}
-      >
-        <Card className="overflow-hidden">
-          <CardHeader className="pb-2">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">August 2025</CardTitle>
-              <div className="flex items-center space-x-2">
-                <Button variant="outline" size="icon" className="h-7 w-7">
-                  <CalendarDays className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-7 gap-2 text-center text-xs mb-2">
-              <div className="text-muted-foreground">Sun</div>
-              <div className="text-muted-foreground">Mon</div>
-              <div className="text-muted-foreground">Tue</div>
-              <div className="text-muted-foreground">Wed</div>
-              <div className="text-muted-foreground">Thu</div>
-              <div className="text-muted-foreground">Fri</div>
-              <div className="text-muted-foreground">Sat</div>
-            </div>
-            <div className="grid grid-cols-7 gap-2 text-center">
-              {[...Array(31)].map((_, i) => {
-                const day = i + 1;
-                const isToday = day === 2;
-                const hasEvent = [5, 10, 15, 22, 28].includes(day);
-                
-                return (
-                  <div 
-                    key={i} 
-                    className={`
-                      aspect-square flex items-center justify-center rounded-full text-xs
-                      ${isToday ? 'bg-primary text-primary-foreground' : hasEvent ? 'bg-secondary/50' : 'hover:bg-secondary/30'}
-                    `}
-                  >
-                    {day}
-                  </div>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
     </div>
   );
 }

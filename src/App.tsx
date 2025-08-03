@@ -20,6 +20,7 @@ import FeeManagementPage from './pages/FeeManagement';
 import CampusNavigatorPage from './pages/CampusNavigator';
 import StudentIDWalletPage from './pages/StudentID';
 import ResultsPage from './pages/ResultsPage';
+import MiscPage from './pages/MiscPage';
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
               <Route path="clubs" element={<ClubsPage />} />
               <Route path="placements" element={<PlacementsPage />} />
               <Route path="updates" element={<UpdatesPage />} />
+              <Route path="misc" element={<MiscPage />} />
               <Route path="attendance" element={<AttendanceTracker />} />
               <Route path="*" element={<NotFound />} />
             </Route>
